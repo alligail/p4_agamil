@@ -20,6 +20,10 @@ router.put('/', async (req, res) => {
     let lat = 0;
     let lng = 0;
     let addr = "";
+
+    console.log("RESULT");
+    console.log(result);
+
     if(result.length > 0){
         console.log("--------------PUT----------------------------------");
         console.log(result);
@@ -33,14 +37,6 @@ router.put('/', async (req, res) => {
         console.log("------------------------------------------------");
     }
 
-    /**
-     * [NOTE!!!]
-     * may return more than one result, and it may return zero results. Make sure you 
-     * handle these cases well! A latitude and longitude of 0 for anything not found is 
-     * appropriate. Also note that the "proper" address is also returned, which **should 
-     * be used as the address stored in the database.
-     */
-    
     const id = await req.db.createPlace(req.body.label, addr, lat, lng);
     res.json({ id: id });
 });
